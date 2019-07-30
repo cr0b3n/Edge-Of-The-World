@@ -77,6 +77,11 @@ PrefabInstance:
       propertyPath: maxDistance
       value: 26
       objectReference: {fileID: 0}
+    - target: {fileID: 2482110304205202108, guid: 6b657f8b7eb89e247ad32f8fbd8df4f0,
+        type: 3}
+      propertyPath: lootType
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5291449399104349884, guid: 6b657f8b7eb89e247ad32f8fbd8df4f0,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

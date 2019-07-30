@@ -3,6 +3,7 @@
 [DisallowMultipleComponent]
 public class PickUp : MonoBehaviour {
 
+    public LootType lootType;
     public bool isBonus = true;
     [Range(26.0f, 28.5f)]
     public float maxDistance = 26f;
@@ -14,8 +15,10 @@ public class PickUp : MonoBehaviour {
     protected int playerLayer;
     protected bool positionReach;
     //private Quaternion shadowRot;
+    protected bool isActive;
 
     protected virtual void Start() {
+        isActive = true;
         //shadowRot = fakeShadow.rotation;
         playerLayer = LayerMask.NameToLayer("Player");
         planet = GameManager.Instance.GetPlanet();
@@ -28,12 +31,15 @@ public class PickUp : MonoBehaviour {
 
     protected virtual void OnTriggerEnter(Collider other) {
 
+        if (!isActive)
+            return;
+
         if (other.gameObject.layer != playerLayer)
             return;
 
         //Check if bonus or not and do action
-        GameManager.Instance.CheckBonus(transform.position, transform.rotation, isBonus);
-
+        GameManager.Instance.CheckBonus(transform.position, transform.rotation, isBonus, lootType);
+        isActive = false;
         //Debug.Log("Player Detected");
         Destroy(gameObject);        
     }

@@ -28,16 +28,22 @@ public class GameManager : MonoBehaviour {
     public float distanceRequirement = 250f;
     public GameObject worldEdge;
     public Transform[] worldEdgeSpawnPoints;
+    public int totalCollection = 5;
+
 
     private float totalDistance;
     private float totalTime;
 
-    private bool isEndGameReady;
+    private bool isDistanceAchieved;
+    private bool isCollectionAchieved;
     private int totalScore;
+    private int collection;
 
     #region Unity Methods
 
     private void Start() {
+        isDistanceAchieved = false;
+        isCollectionAchieved = false;
         Time.timeScale = 1f;
     }
 
@@ -55,28 +61,47 @@ public class GameManager : MonoBehaviour {
         return planet;
     }
 
-    public void CheckBonus(Vector3 pos, Quaternion rot, bool isBonus) {
+    public void CheckBonus(Vector3 pos, Quaternion rot, bool isBonus, LootType lootType) {
 
-        if (isBonus)
-            totalScore++;
-        else
+        if (isBonus) {
+
+            collection++;
+            GUIManager.Instance.ActivateUIEffect((int)lootType);
+
+            if (collection >= totalCollection)
+                isCollectionAchieved = true;
+
+        } else {
             totalScore--;
-
+        }          
+          
         pickupEffectPool.GetPooledObject(pos, rot);
-        Debug.Log("Score: " + totalScore);
+        Debug.Log("Collected: " + collection);
     }
 
 
     private void CheckEndGameReady() {
 
-        if (isEndGameReady) return;
+        if (!isCollectionAchieved) return;
+
+        if (isDistanceAchieved) return;
 
         if (traveledDistance.TotalTraveledDistance > distanceRequirement) {
-            isEndGameReady = true;
-            Instantiate(worldEdge, worldEdgeSpawnPoints[Random.Range(0, worldEdgeSpawnPoints.Length)].position, Quaternion.identity);            
+            isDistanceAchieved = true;
+            Instantiate(worldEdge, worldEdgeSpawnPoints[Random.Range(0, worldEdgeSpawnPoints.Length)].position, Quaternion.identity);
             Debug.Log("Activate endgame portal");
         }
     }
 
     #endregion /Custom Method
+}
+
+public enum LootType {
+    Illu,
+    Alien,
+    Eye,
+    Mason,
+    Moon,
+    Gov,
+    Media
 }

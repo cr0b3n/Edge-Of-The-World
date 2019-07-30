@@ -8,6 +8,9 @@ public class EndGame : PickUp {
 
     protected override void OnTriggerEnter(Collider other) {
 
+        if (!isActive)
+            return;
+
         if (other.gameObject.layer != playerLayer)
             return;
 
@@ -15,7 +18,7 @@ public class EndGame : PickUp {
         //Debug.Log("Game ended roll credits");
 
         Player player = other.GetComponent<Player>();
-
+        isActive = false;
         player?.ActivateEndGame();
     }
 }
