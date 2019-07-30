@@ -6,7 +6,7 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class PlanetMovingObject : MonoBehaviour {
 
-    private GameObject planet;
+    private Transform planet;
     private Rigidbody myRB;
     private float gravity = 100;
     private bool OnGround = false;
@@ -53,7 +53,7 @@ public class PlanetMovingObject : MonoBehaviour {
         }
 
         //GRAVITY and ROTATION
-        Vector3 gravDirection = (transform.position - planet.transform.position).normalized;
+        Vector3 gravDirection = (transform.position - planet.position).normalized;
 
         if (OnGround == false) {
             myRB.AddForce(gravDirection * -gravity);

@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour {
     #endregion /Singleton
 
     [SerializeField]
-    private GameObject planet;
+    private Transform planet;
     public TraveledDistance traveledDistance;
     public float distanceRequirement = 250f;
 
@@ -44,7 +44,7 @@ public class GameManager : MonoBehaviour {
 
     #region Custom Method
 
-    public GameObject GetPlanet() {
+    public Transform GetPlanet() {
         return planet;
     }
 
