@@ -10,34 +10,35 @@ public class PickUp : MonoBehaviour {
 
     //public Transform fakeShadow;
 
-    private Transform planet;
-    private int playerLayer;
-    private bool positionReach;
+    protected Transform planet;
+    protected int playerLayer;
+    protected bool positionReach;
     //private Quaternion shadowRot;
 
-    private void Start() {
+    protected virtual void Start() {
         //shadowRot = fakeShadow.rotation;
         playerLayer = LayerMask.NameToLayer("Player");
         planet = GameManager.Instance.GetPlanet();
 
     }
 
-    private void Update() {
+    protected virtual void Update() {
         SetPositionOrientation();
     }
 
-    private void OnTriggerEnter(Collider other) {
+    protected virtual void OnTriggerEnter(Collider other) {
 
         if (other.gameObject.layer != playerLayer)
             return;
 
-
-        Debug.Log("Player Detected");
-
         //Check if bonus or not and do action
+        GameManager.Instance.CheckBonus(transform.position, transform.rotation, isBonus);
+
+        //Debug.Log("Player Detected");
+        Destroy(gameObject);        
     }
 
-    private void SetPositionOrientation() {
+    protected virtual void SetPositionOrientation() {
 
         if (positionReach)
             return;

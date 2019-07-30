@@ -23,7 +23,7 @@ ModelImporter:
     second: Armature|DeathAnim
   - first:
       74: -5499812603613256880
-    second: Armature|DeathBackward
+    second: DeathBackward
   - first:
       74: 2508610078572645366
     second: Armature|DeathForward
@@ -275,7 +275,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Armature|DeathBackward
+      name: DeathBackward
       takeName: Armature|DeathBackward
       internalID: -5499812603613256880
       firstFrame: 0
@@ -291,10 +291,10 @@ ModelImporter:
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      keepOriginalOrientation: 1
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 1
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []

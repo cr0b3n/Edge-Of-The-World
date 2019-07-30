@@ -18,18 +18,34 @@ public class Player : MonoBehaviour {
     public LayerMask walkableLayer;
     public ObjectPooler jumpEffectPool;
 
+    [Header("Game Over")]
+    public Renderer graphicRender;
+    public Material deathMaterial;
+    public float pitch = .25f;
+    //public float relativeRotation = 180f;
+
     private bool isJumping;
     private float stateTimeElapse = 0f;
+    private bool gameOver;
+    private Transform camTransform;
+    private bool canRotate;
 
     private static readonly int moveAnim = Animator.StringToHash("speedPercent");
     private static readonly int jumping = Animator.StringToHash("isJumping");
 
     #region Unity Execusions
-    //private void Start() {
-    //    walkable = LayerMask.NameToLayer("Walkable");
-    //}
+    private void Start() {
+        //walkable = LayerMask.NameToLayer("Walkable");
+        camTransform = Camera.main.transform;
+    }
 
     private void Update() {
+
+
+        if (gameOver) {
+            GameOverMovement();
+            return;
+        }
 
         PlayerMovement(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
         CheckJumpStatus();
@@ -103,6 +119,41 @@ public class Player : MonoBehaviour {
 
         float movementMagnitude = Mathf.Clamp(movement.magnitude, 0f, 1f);
         myAnim.SetFloat(moveAnim, movementMagnitude, .1f, Time.deltaTime);
+    }
+
+    private void RotateCamera() {
+
+        if (!canRotate) {
+            canRotate = CheckIfCountDownElapsed(2f);
+            return;
+        }
+
+        Vector3 targetCenter = transform.position; //- offset;
+        Vector3 dToCenter = camTransform.transform.position - targetCenter;
+        //Vector3 angles = new Vector3(0f, 1f);
+        Quaternion newRot = Quaternion.Euler(Vector3.up);
+        Vector3 newDir = newRot * dToCenter;
+        camTransform.position = targetCenter + newDir;
+        camTransform.LookAt(transform.position);
+    }
+
+    private void GameOverMovement() {
+        transform.Translate(Vector3.up * Time.deltaTime);
+        RotateCamera();
+    }
+
+    public void ActivateEndGame() {
+        PlanetMovingObject pmo = GetComponent<PlanetMovingObject>();
+
+        if (pmo != null)
+            pmo.enabled = false;
+
+        gameOver = true;
+        myRB.isKinematic = false;
+        myRB.velocity = Vector3.zero;
+        myRB.angularVelocity = Vector3.zero;
+        graphicRender.material = deathMaterial;
+        myAnim.SetBool("gameOver", true);
     }
 
     #endregion /My Methods

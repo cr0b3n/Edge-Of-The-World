@@ -18,20 +18,27 @@ public class GameManager : MonoBehaviour {
     }
     #endregion /Singleton
 
+    [Header("Basic Section")]
     [SerializeField]
     private Transform planet;
+    public ObjectPooler pickupEffectPool;
+
+    [Header("Goal Section")]
     public TraveledDistance traveledDistance;
     public float distanceRequirement = 250f;
+    public GameObject worldEdge;
+    public Transform[] worldEdgeSpawnPoints;
 
     private float totalDistance;
     private float totalTime;
 
     private bool isEndGameReady;
+    private int totalScore;
 
     #region Unity Methods
 
     private void Start() {
-        
+        Time.timeScale = 1f;
     }
 
 
@@ -48,12 +55,25 @@ public class GameManager : MonoBehaviour {
         return planet;
     }
 
+    public void CheckBonus(Vector3 pos, Quaternion rot, bool isBonus) {
+
+        if (isBonus)
+            totalScore++;
+        else
+            totalScore--;
+
+        pickupEffectPool.GetPooledObject(pos, rot);
+        Debug.Log("Score: " + totalScore);
+    }
+
+
     private void CheckEndGameReady() {
 
         if (isEndGameReady) return;
 
         if (traveledDistance.TotalTraveledDistance > distanceRequirement) {
             isEndGameReady = true;
+            Instantiate(worldEdge, worldEdgeSpawnPoints[Random.Range(0, worldEdgeSpawnPoints.Length)].position, Quaternion.identity);            
             Debug.Log("Activate endgame portal");
         }
     }
