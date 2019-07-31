@@ -45,12 +45,14 @@ public class GameManager : MonoBehaviour {
         isDistanceAchieved = false;
         isCollectionAchieved = false;
         Time.timeScale = 1f;
+        AudioManager.PlayBGM(BGMType.Gameplay);
+        AudioListener.pause = false;
     }
 
 
     private void Update() {
 
-        CheckEndGameReady();       
+        CheckEndGameReady();
     }
 
     #endregion /Unity Methods
@@ -66,17 +68,21 @@ public class GameManager : MonoBehaviour {
         if (isBonus) {
 
             collection++;
-            GUIManager.Instance.ActivateUIEffect((int)lootType);
+            totalScore += 100;
+            GUIManager.Instance.ActivateUIEffect((int)lootType, totalScore);
 
             if (collection >= totalCollection)
                 isCollectionAchieved = true;
 
+            AudioManager.PlayAudioEffect(EffectAudio.Bonus);
         } else {
-            totalScore--;
-        }          
-          
+            totalScore -= 100;
+            GUIManager.Instance.ActivateUIEffect((int)lootType, totalScore, false);
+            AudioManager.PlayAudioEffect(EffectAudio.Penalty);
+        }
+
         pickupEffectPool.GetPooledObject(pos, rot);
-        Debug.Log("Collected: " + collection);
+        //Debug.Log("Collected: " + collection);
     }
 
 
@@ -89,8 +95,13 @@ public class GameManager : MonoBehaviour {
         if (traveledDistance.TotalTraveledDistance > distanceRequirement) {
             isDistanceAchieved = true;
             Instantiate(worldEdge, worldEdgeSpawnPoints[Random.Range(0, worldEdgeSpawnPoints.Length)].position, Quaternion.identity);
-            Debug.Log("Activate endgame portal");
+            //Debug.Log("Activate endgame portal");
         }
+    }
+
+    public void ActivateEnding() {
+        AudioManager.PlayBGM(BGMType.Credits);
+       GUIManager.Instance.SetCreditsDetails(totalScore);       
     }
 
     #endregion /Custom Method

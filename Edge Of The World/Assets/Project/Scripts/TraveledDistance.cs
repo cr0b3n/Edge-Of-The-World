@@ -11,18 +11,19 @@ public class TraveledDistance : MonoBehaviour {
     public float TotalTraveledDistance { get; private set; }
     //private float distanceTraveled;
     //private int walkable;
-    //private bool isActive;
+    [HideInInspector]
+    public bool isActive;
     //private float stateTimeElapse;
 
     private void Start() {
         TotalTraveledDistance = 0f;
-        //isActive = false;
+        isActive = true;
         //walkable = LayerMask.NameToLayer("Walkable");
     }
 
     private void Update() {
 
-        //if (!isActive) return;
+        if (!isActive) return;
 
         Vector3 newPos = new Vector3(transform.position.x, 0f, transform.position.z);
 

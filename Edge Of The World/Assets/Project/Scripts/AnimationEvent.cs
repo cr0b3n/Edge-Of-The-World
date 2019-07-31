@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [DisallowMultipleComponent]
 public class AnimationEvent : MonoBehaviour {
@@ -9,5 +7,11 @@ public class AnimationEvent : MonoBehaviour {
 
     public void SpawnStepEffect() {
         stepsPool.GetPooledObject(transform.position, transform.rotation);
+        AudioManager.PlayPlayerAudio(PlayerAudio.Run);
     }
+
+    //public void PlayWalkAudio() {
+    //    AudioManager.PlayPlayerAudio(PlayerAudio.Walk);
+      
+    //}
 }

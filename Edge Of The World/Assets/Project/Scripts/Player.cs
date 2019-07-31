@@ -90,6 +90,7 @@ public class Player : MonoBehaviour {
         isJumping = false;
         myAnim.SetBool(jumping, isJumping);
         jumpEffectPool.GetPooledObject(transform.position, transform.rotation);
+        AudioManager.PlayPlayerAudio(PlayerAudio.Land);
     }
 
     private void CheckJump() {
@@ -100,6 +101,7 @@ public class Player : MonoBehaviour {
                 isJumping = true;
                 myAnim.SetBool(jumping, isJumping);
                 jumpEffectPool.GetPooledObject(transform.position, transform.rotation);
+                AudioManager.PlayPlayerAudio(PlayerAudio.Jump);
             }              
         }
     }
@@ -124,7 +126,11 @@ public class Player : MonoBehaviour {
     private void RotateCamera() {
 
         if (!canRotate) {
-            canRotate = CheckIfCountDownElapsed(2f);
+
+            if(CheckIfCountDownElapsed(2f)) {
+                canRotate = true;
+                GameManager.Instance.ActivateEnding();
+            }           
             return;
         }
 
@@ -154,6 +160,13 @@ public class Player : MonoBehaviour {
         myRB.angularVelocity = Vector3.zero;
         graphicRender.material = deathMaterial;
         myAnim.SetBool("gameOver", true);
+
+        TraveledDistance td = GetComponent<TraveledDistance>();
+
+        if (td != null)
+            td.isActive = false;
+
+        GUIManager.Instance.gameOver = true;
     }
 
     #endregion /My Methods

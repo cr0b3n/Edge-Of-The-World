@@ -17,6 +17,7 @@ public class EndGame : PickUp {
         Instantiate(catPrefabs[Random.Range(0, catPrefabs.Length)], transform.position, transform.rotation);
         //Debug.Log("Game ended roll credits");
 
+        AudioManager.PlayAudioEffect(EffectAudio.Cat);
         Player player = other.GetComponent<Player>();
         isActive = false;
         player?.ActivateEndGame();

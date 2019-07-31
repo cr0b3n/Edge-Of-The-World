@@ -1,0 +1,70 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GUIAtlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 0028d6a1a077fcc4ba980261187c3e6d, type: 3}
+    totalSpriteSurfaceArea: 230400
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 269227001cf440f4eb25eda9ad9f0ad5, type: 3}
+  - {fileID: 21300000, guid: 1d5d6b1133662b8438d5a286050b11c9, type: 3}
+  - {fileID: 21300000, guid: 3d3ce6a1d8acff446a84a178b8ab0db1, type: 3}
+  - {fileID: 21300000, guid: c06d0ff12bfee964ea4cb5b3ddaf9e54, type: 3}
+  - {fileID: 21300000, guid: f18da0222e850ab4387556e48aa8247f, type: 3}
+  - {fileID: 21300000, guid: b2fbe153e6e06ec4cb773778c07f9afd, type: 3}
+  - {fileID: 21300000, guid: a7f91025e511bdf40a2e8592486fadab, type: 3}
+  - {fileID: 21300000, guid: 0640d3c6f3a372f46894ffba5bcde5ba, type: 3}
+  - {fileID: 21300000, guid: 24bd4b17bf6b1c340b18bb10095a2f60, type: 3}
+  - {fileID: 21300000, guid: d0503f785d72cf24891a3427dc15e233, type: 3}
+  - {fileID: 21300000, guid: 7901bb8c900ef784cb20edae5959af9c, type: 3}
+  - {fileID: 21300000, guid: 78a692dde90c0ff40ac13a9e1aca5785, type: 3}
+  - {fileID: 21300000, guid: e8d4a13e78ec47d49be6b811f47a9b1b, type: 3}
+  - {fileID: 21300000, guid: 3ee550aecc3575443af7a1f6dc721548, type: 3}
+  - {fileID: 21300000, guid: 435edaae07c29014bb99257df765b53f, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - uiMedia
+  - empty
+  - uiAlien
+  - uiEye
+  - info
+  - squarewhite
+  - records
+  - uiMason
+  - reset
+  - uiMoon
+  - home
+  - credits
+  - uiIllu
+  - play
+  - uiGov
+  m_Tag: GUIAtlas
+  m_IsVariant: 0
